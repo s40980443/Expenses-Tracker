@@ -11,13 +11,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Analysis extends StatelessWidget{
   @override
 
-  Future<void> gettingData() async {
-    await FirebaseFirestore.instance.collection("test2").get().then((event) {
-    for (var doc in event.docs) {
-        print("${doc.id} => ${doc.data()}");
-      }
-    });
-  }
+  // Future<void> gettingData() async {
+  //   await FirebaseFirestore.instance.collection("test2").get().then((event) {
+  //   for (var doc in event.docs) {
+  //       print("${doc.id} => ${doc.data()}");
+  //     }
+  //   });
+  // }
 
 
   Widget build(BuildContext context){
@@ -51,14 +51,14 @@ class Analysis extends StatelessWidget{
 
 class ListDetail extends StatelessWidget{
 
-  @override
-    Future<void> gettingData() async {
-    await FirebaseFirestore.instance.collection("test2").get().then((event) {
-    for (var doc in event.docs) {
-        print("${doc.id} => ${doc.data()}");
-      }
-    });
-  }
+  // @override
+  //   Future<void> gettingData() async {
+  //   await FirebaseFirestore.instance.collection("Data").get().then((event) {
+  //   for (var doc in event.docs) {
+  //       print("${doc.id} => ${doc.data()}");
+  //     }
+  //   });
+  // }
 
 
   @override
