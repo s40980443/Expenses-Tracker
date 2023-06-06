@@ -6,7 +6,7 @@ import 'pie/chart_container.dart';
 import 'pie/pie_chart.dart';
 import 'pie/pie_chart_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 
 class Analysis extends StatelessWidget{
   @override

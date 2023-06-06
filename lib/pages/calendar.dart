@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app4/pages/add.dart';
 import 'package:my_app4/pages/analysis.dart';
-import 'package:my_app4/pages/home.dart';
+import 'package:my_app4/pages/pie.dart';
 import 'package:my_app4/pages/setting.dart';
 
 import 'package:table_calendar/table_calendar.dart';
