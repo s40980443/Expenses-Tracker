@@ -35,40 +35,34 @@ class _SigninState extends State<Signin> {
     final _focusName = FocusNode();
     final _focusEmail = FocusNode();
     final _focusPassword = FocusNode();
+    final isLogin = false;
   super.initState();
   }
 
-  @override
-  void dispose(){
-    _emailController.dispose();
-    _passwordController.dispose();
-  super.dispose();
+  // @override
+  // void dispose(){
+  //   _emailController.dispose();
+  //   _passwordController.dispose();
+  // super.dispose();
+  // }
+
+  void login(email,password) async{
+    try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: "skkfrc8159@gmail.com",
+    password: "Ss40980443"
+  );
+  
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'user-not-found') {
+    print('No user found for that email.');
+  } else if (e.code == 'wrong-password') {
+    print('Wrong password provided for that user.');
+  }
+}
   }
 
 
-
-  void createUser(email,password) async{
-    try{
-      //create User
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email:email,
-        password: password
-        );
-      print("Email : ${email}");
-      print("Password : ${password}");
-      
-    }on FirebaseAuthException catch(e){
-      //密碼太短
-      if (e.code == "weak-password") {
-        print('The password provided is too weak.');
-      //Email已經使用
-      } else if (e.code == "email-already-in-use") {
-        print('An account already exists for that email.');
-      }
-    }catch(e){
-      print(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,18 +97,26 @@ class _SigninState extends State<Signin> {
             ElevatedButton(
               onPressed: () async {
                 
-
+                final email = _emailController.text.trim();
+                final password = _passwordController.text.trim();
+                login(email, password);
+                
                 User? user = FirebaseAuth.instance.currentUser;
                 if(user!=null){
-                  Navigator.pushAndRemoveUntil(context, 
-                    MaterialPageRoute(
-                      builder: (context) => 
-                      ProfilePage(user:user,),
-                      // BottomNavigationController(),
-                      ),
-                      (route) => false
-                  );
+                  await Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>BottomNavigationController()), (Route<dynamic> route) => false);
+
+                  // await Navigator.push(context, 
+                  //    MaterialPageRoute(
+                  //     builder: (context) => 
+                      
+                  //     BottomNavigationController(),
+                  //     ),
+                  // );
                 }
+
+
+
+
               },
               child: Text("Submit")
             ),
@@ -126,5 +128,13 @@ class _SigninState extends State<Signin> {
         ),
     )
     );
+    
+  }
+  
+  @override
+  void dispose(){
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

@@ -45,7 +45,27 @@ class _SignUpState extends State<SignUp> {
   super.dispose();
   }
 
+  void test(){
+    FirebaseAuth.instance
+  .authStateChanges()
+  .listen((User? user) {
+    if (user != null) {
+      print(user.uid);
+    }else{
+      print("not login");
+    }
+  });
+  }
 
+  void currentTest(){
+    
+    if(FirebaseAuth.instance.currentUser!=null){
+      print("目前登入");
+    }else {
+      print("目前無使用者");
+    }
+    
+  }
 
   void createUser(email,password) async{
     try{
@@ -116,9 +136,6 @@ class _SignUpState extends State<SignUp> {
             ),
 
 
-            TextButton(onPressed: () async{
-                await FirebaseAuth.instance.signOut();
-              }, child: Text("Logout")),
             
             //Sign in
             TextButton(onPressed: () {
@@ -128,8 +145,8 @@ class _SignUpState extends State<SignUp> {
               );
             },
             child: Text("Sign in"),
-            )
-
+            ),
+            
             
           ],
 

@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 //pages
@@ -32,8 +34,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 
 Future<void> main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
-   Firebase.initializeApp(
+   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
@@ -41,44 +44,31 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   // const MyApp({super.key});
-
-  bool isLogin(){
-    if (FirebaseAuth.instance.currentUser != null) {
-      return true;
-    } 
-    else {   
-      return false;
-    }
-    
-  }
-
-
+  
   @override
   Widget build(BuildContext context) {
-    // if (isLogin()) {
-    //   //以登入
-    // return MaterialApp(
-    //     debugShowCheckedModeBanner: false,
-    //     home: BottomNavigationController(),
-    // );
-    // } else{
-    //   //未登入
-    // return MaterialApp(
-    //     debugShowCheckedModeBanner: false,
-    //     home: SignUp(),
-    // );
-// }
+  User? user = FirebaseAuth.instance.currentUser;
+  Widget firstWidget;
+  if(user != null){
+    //以登入
+    firstWidget =  BottomNavigationController();
+  }else{
+    firstWidget = SignUp();
+  }
+
     return MaterialApp(
   
       home: Scaffold(
+        
         // body: BottomNavigationController(),
-        body: SignUp(),
+        body: firstWidget,
         
       )
     );
-    
+
   }
 }
+
 
 
 
@@ -91,7 +81,7 @@ class MyApp extends StatelessWidget {
 
 
 class BottomNavigationController extends StatefulWidget {
-  BottomNavigationController({Key? key}) : super(key: key);
+  // BottomNavigationController({Key? key}) : super(key: key);
 
   @override
   _BottomNavigationControllerState createState() => _BottomNavigationControllerState();
@@ -99,8 +89,12 @@ class BottomNavigationController extends StatefulWidget {
 
 class _BottomNavigationControllerState extends State<BottomNavigationController> {
 
+
   int _currentIndex = 0;
-  final pages = [AddTaskAlertDialogState(),Pie(),Analysis(),Calendar()];
+  final pages = [AddTaskAlertDialogState(),Pie(),Analysis(),Calendar(),Setting()];
+
+
+
     @override
     Widget build(BuildContext context){
       return Scaffold(
@@ -115,7 +109,7 @@ class _BottomNavigationControllerState extends State<BottomNavigationController>
           BottomNavigationBarItem( icon: Icon(Icons.pie_chart),label: '首頁', backgroundColor: Colors.black ),
           BottomNavigationBarItem( icon: Icon(Icons.analytics),label: '分析', backgroundColor: Colors.black ),
           BottomNavigationBarItem( icon: Icon(Icons.calendar_month) ,label: '日期', backgroundColor: Colors.black),
-          // BottomNavigationBarItem( icon: Icon(Icons.settings),label: '設定' , backgroundColor: Colors.black),
+          BottomNavigationBarItem( icon: Icon(Icons.settings),label: '設定' , backgroundColor: Colors.black),
           
           ], 
           currentIndex: _currentIndex,
