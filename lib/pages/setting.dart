@@ -9,16 +9,17 @@ import 'package:my_app4/pages/auth/signup.dart';
 
 //firebase
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 
 
 class Setting extends StatefulWidget {
+
+
   @override
   State<StatefulWidget> createState() => _SettingState();
 }
 
 class _SettingState extends State<Setting>{
-
 
 
 
@@ -30,6 +31,7 @@ class _SettingState extends State<Setting>{
     return Center(
       child: Column(
         children: [
+          Text(""),
           TextButton(
             onPressed: ()async{
               logout();
@@ -37,15 +39,6 @@ class _SettingState extends State<Setting>{
               User? user = FirebaseAuth.instance.currentUser;
               if(user!=null){
                 await Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>SignUp()), (Route<dynamic> route) => false);
-                // await Navigator.pushAndRemoveUntil(context, 
-                //     MaterialPageRoute(
-                //       builder: (context) => 
-                //       // ProfilePage(user:user,),
-                //       SignUp(),
-                      
-                //       )
-                    
-                //   );
                 }
   
 
