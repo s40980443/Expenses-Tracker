@@ -46,6 +46,6 @@ Name	Version	Description
 
 
 圖片預覽：
-![Alt text] https://lurl.cc/ZIjy4
+https://imgur.com/gallery/n5CmU87
 
 
